@@ -7,6 +7,21 @@ public class Especialidade {
 	private String nome;
 	private String descricao;
 	
+	// Construtores da classe -> método construtor -> **tem que ter o MESMO NOME da classe** 
+	public Especialidade(String nome) {
+		this.nome = nome;
+	}
+	
+	// Construtor default -> que não pede nada
+	public Especialidade(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+	
+	public Especialidade() {
+		
+	}
+	
 	// métodos de acesso aos atributos
 	public void setNome(String nome) {
 		
