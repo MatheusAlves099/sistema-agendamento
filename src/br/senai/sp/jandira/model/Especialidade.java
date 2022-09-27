@@ -18,7 +18,7 @@ public class Especialidade {
 		this.descricao = descricao;
 	}
 	
-	public Especialidade() {
+	public Especialidade() { // Construtor Default (Padrão)
 		
 	}
 	

@@ -10,7 +10,7 @@ public class TesteWrappers {
 		
 		int a = 5;
 		
-		Integer b = 5;
+		Integer b = 5; // wrap -> embrulhar, empacotar, envolver
 		
 		Double x = 2.9;
 		
