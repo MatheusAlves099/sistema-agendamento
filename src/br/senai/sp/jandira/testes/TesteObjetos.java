@@ -3,6 +3,7 @@ package br.senai.sp.jandira.testes;
 import java.util.ArrayList;
 
 import br.senai.sp.jandira.AgendaApp;
+import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 
@@ -14,18 +15,53 @@ public class TesteObjetos {
         //e1.setNome("Cardiologia");
         e1.setDescricao("Não deixa ter um ataque.");
 
+        EspecialidadeDAO.gravar(e1);
+
         Especialidade e2 = new Especialidade();
         e2.setNome("Gastro");
         e2.setDescricao("Não deixa ficar com dor de barriga.");
 
+        EspecialidadeDAO.gravar(e2);
+
         Especialidade e3 = new Especialidade();
         e3.setNome("Qualquer coisa!");
 
+        EspecialidadeDAO.gravar(e3);
+
         Especialidade e4 = new Especialidade("Otorrino", "Cuida do ouvido!");
-        
+
+        EspecialidadeDAO.gravar(e4);
+
         Especialidade e5 = new Especialidade();
         e5.setNome("Clinico Geral");
+
+        EspecialidadeDAO.gravar(e5);
+
+        for (Especialidade ee : EspecialidadeDAO.getEspecialidades()) {
+            System.out.println(ee.getNome() + " - " + ee.getCodigo());
+        }
+
+        EspecialidadeDAO.excluir(101);
+        for (Especialidade ee : EspecialidadeDAO.getEspecialidades()) {
+            System.out.println(ee.getNome() + " - " + ee.getCodigo());
+        }
+
+        System.out.println("-------- BUSCA ---------");
+        Especialidade procurada = EspecialidadeDAO.getEspecialidade(102);
+        System.out.println(procurada.getNome());
+
+        System.out.println("--------- UPDATE ---------");
+        Especialidade EspecialidadeAtualizada = new Especialidade();
+        EspecialidadeAtualizada.setCodigo(103);
+        EspecialidadeAtualizada.setNome("Otorrinolaringologia");
+        EspecialidadeAtualizada.setDescricao("Essa é uma nova descrição.");
+        EspecialidadeDAO.atualizar(EspecialidadeAtualizada);
         
+        System.out.println("---------- NOVO RESULTADO -----------");
+        for (Especialidade ee : EspecialidadeDAO.getEspecialidades()) {
+            System.out.println(ee.getNome() + " - " + ee.getCodigo());
+        }
+
         // exibir a quantidade de especialidades criadas até agora
         System.out.println("TOTAL DE ESPECIALIDADES ----> " + e1.getContador());
         System.out.println(e1.getCodigo() + " - " + e1.getNome());
@@ -33,7 +69,7 @@ public class TesteObjetos {
         System.out.println(e3.getCodigo() + " - " + e3.getNome());
         System.out.println(e4.getCodigo() + " - " + e4.getNome());
         System.out.println(e5.getCodigo() + " - " + e5.getNome());
-        
+
         ArrayList<Especialidade> especialidades = new ArrayList<>();
         especialidades.add(e1);
         especialidades.add(e2);

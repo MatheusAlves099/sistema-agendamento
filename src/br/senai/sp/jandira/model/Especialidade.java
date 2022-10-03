@@ -37,7 +37,11 @@ public class Especialidade {
     public Integer getCodigo() {
         return codigo;
     }
-   
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+      
     public void setNome(String nome) {
 
         if (nome.length() >= 3) {
