@@ -11,6 +11,19 @@ public class TesteObjetos {
 
     public static void main(String[] args) {
 
+        int b[][] = {
+            {2, 344, 5},
+            {23, 52, 56},
+            {45, 32, 2},
+            {24, 14, 252}
+        };
+
+        String quitanda[][] = {
+            {"Banana", "Laranja", "Limão"},
+            {"Picles", "Pepino", "Pimentão", "Beterraba"},
+            {"Tomate", "Abacate", "Jiló", "Alface", "Couve"},
+        };
+
         Especialidade e1 = new Especialidade("Cardiologia");
         //e1.setNome("Cardiologia");
         e1.setDescricao("Não deixa ter um ataque.");
@@ -56,7 +69,7 @@ public class TesteObjetos {
         EspecialidadeAtualizada.setNome("Otorrinolaringologia");
         EspecialidadeAtualizada.setDescricao("Essa é uma nova descrição.");
         EspecialidadeDAO.atualizar(EspecialidadeAtualizada);
-        
+
         System.out.println("---------- NOVO RESULTADO -----------");
         for (Especialidade ee : EspecialidadeDAO.getEspecialidades()) {
             System.out.println(ee.getNome() + " - " + ee.getCodigo());
