@@ -3,7 +3,7 @@ package br.senai.sp.jandira.model;
 import javax.swing.JOptionPane;
 
 public class Especialidade {
-    
+
     private static int contador = 99;
     private Integer codigo;
     private String nome;
@@ -12,24 +12,25 @@ public class Especialidade {
     // Construtores da classe -> método construtor -> **tem que ter o MESMO NOME da classe** 
     public Especialidade(String nome) {
         this.nome = nome;
-        this.contador++;
-        this.codigo = contador;
+        gerarCodigo();
     }
 
     public Especialidade(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
-        this.contador++;
-        this.codigo = contador;
+        gerarCodigo();
     }
 
     public Especialidade() { // Construtor Default (Padrão) -> que não pede nada
+        gerarCodigo();
+    }
+
+    private void gerarCodigo() {
         this.contador++;
         this.codigo = contador;
     }
 
     // métodos de acesso aos atributos
-
     public int getContador() {
         return contador;
     }
@@ -41,7 +42,7 @@ public class Especialidade {
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
-      
+
     public void setNome(String nome) {
 
         if (nome.length() >= 3) {
