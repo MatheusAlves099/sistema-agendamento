@@ -1,7 +1,7 @@
 package br.senai.sp.jandira.ui;
 
-import br.senai.sp.jandira.dao.EspecialidadeDAO;
-import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import br.senai.sp.jandira.model.PlanoDeSaude;
 import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -11,24 +11,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 22282211
  */
-public class PanelEspecialidades extends javax.swing.JPanel {
+public class PanelPlanoDeSaude extends javax.swing.JPanel {
 
     private int linha;
 
-    public PanelEspecialidades() {
+    public PanelPlanoDeSaude() {
         initComponents();
-        EspecialidadeDAO.criarListaDeEspecialidades();
+        PlanoDeSaudeDAO.criarListaDePlanosDeSaude();
         ajustarTabela();
         preencherTabela();
     }
 
     private int getLinha() {
-        linha = tableEspecialidades.getSelectedRow();
+        linha = tablePlanosDeSaude.getSelectedRow();
         return linha;
     }
 
     private Integer getCodigo() {
-        String codigoStr = tableEspecialidades.getValueAt(
+        String codigoStr = tablePlanosDeSaude.getValueAt(
                 getLinha(), 
                 0).toString();
         Integer codigo = Integer.valueOf(codigoStr);
@@ -39,18 +39,18 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollEspecialidades = new javax.swing.JScrollPane();
-        tableEspecialidades = new javax.swing.JTable();
+        scrollPlanosDeSaude = new javax.swing.JScrollPane();
+        tablePlanosDeSaude = new javax.swing.JTable();
         buttonExcluir = new javax.swing.JButton();
         buttonEditar = new javax.swing.JButton();
         buttonAdicionar = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de especialidades:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT", 1, 12), new java.awt.Color(255, 0, 51))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de planos de saude:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT", 1, 12), new java.awt.Color(255, 0, 51))); // NOI18N
         setPreferredSize(new java.awt.Dimension(780, 290));
         setLayout(null);
 
-        tableEspecialidades.setBackground(new java.awt.Color(255, 255, 255));
-        tableEspecialidades.setModel(new javax.swing.table.DefaultTableModel(
+        tablePlanosDeSaude.setBackground(new java.awt.Color(255, 255, 255));
+        tablePlanosDeSaude.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -61,10 +61,10 @@ public class PanelEspecialidades extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
-        scrollEspecialidades.setViewportView(tableEspecialidades);
+        scrollPlanosDeSaude.setViewportView(tablePlanosDeSaude);
 
-        add(scrollEspecialidades);
-        scrollEspecialidades.setBounds(10, 20, 760, 210);
+        add(scrollPlanosDeSaude);
+        scrollPlanosDeSaude.setBounds(10, 20, 760, 210);
 
         buttonExcluir.setBackground(new java.awt.Color(0, 0, 102));
         buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/excluir.png"))); // NOI18N
@@ -106,32 +106,32 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
 
         if (getLinha() != -1) {
-            excluirEspecialidade();
+            excluirPlanoDeSaude();
         } else {
             JOptionPane.showMessageDialog(
                     this,
-                    "Por favor, selecione a especialidade que você deseja excluir!",
+                    "Por favor, selecione o plano de saúde que você deseja excluir!",
                     "Atenção",
                     JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
-    private void editarEspecialidade() {
+    private void editarPlanoDeSaude() {
         
-        Especialidade especialidade = EspecialidadeDAO.getEspecialidade(getCodigo());
+        PlanoDeSaude planoDeSaude = PlanoDeSaudeDAO.getPlanoDeSaude(getCodigo());
         
-        EspecialidadesDialog especialidadeDialog
-                = new EspecialidadesDialog(
+        PlanosDeSaudeDialog planoDeSaudeDialog
+                = new PlanosDeSaudeDialog(
                         null, 
                         true, 
-                        especialidade, 
+                        planoDeSaude, 
                         OperacaoEnum.EDITAR);
 
-        especialidadeDialog.setVisible(true);
+        planoDeSaudeDialog.setVisible(true);
         preencherTabela();
     }
 
-    private void excluirEspecialidade() {
+    private void excluirPlanoDeSaude() {
 
         int resposta = JOptionPane.showConfirmDialog(
                 this,
@@ -141,7 +141,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
                 JOptionPane.QUESTION_MESSAGE);
 
         if (resposta == 0) {
-            EspecialidadeDAO.excluir(getCodigo());
+            PlanoDeSaudeDAO.excluir(getCodigo());
             preencherTabela();
         }
 
@@ -150,25 +150,25 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
 
         if (getLinha() != -1) {
-            editarEspecialidade();
+            editarPlanoDeSaude();
         } else {
             JOptionPane.showConfirmDialog(
                     this,
-                    "Por favor, selecione a especialidade que você deseja editar.",
-                    "Especialidades",
+                    "Por favor, selecione o plano de saúde que você deseja editar.",
+                    "Planos de Saúde",
                     JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_buttonEditarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        EspecialidadesDialog especialidadeDialog
-                = new EspecialidadesDialog(
+        PlanosDeSaudeDialog planoDeSaudeDialog
+                = new PlanosDeSaudeDialog(
                         null, 
                         true, 
                         OperacaoEnum.ADICIONAR);
 
-        especialidadeDialog.setVisible(true);
+        planoDeSaudeDialog.setVisible(true);
         preencherTabela();
 
     }//GEN-LAST:event_buttonAdicionarActionPerformed
@@ -177,27 +177,29 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private javax.swing.JButton buttonAdicionar;
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
-    private javax.swing.JScrollPane scrollEspecialidades;
-    private javax.swing.JTable tableEspecialidades;
+    private javax.swing.JScrollPane scrollPlanosDeSaude;
+    private javax.swing.JTable tablePlanosDeSaude;
     // End of variables declaration//GEN-END:variables
 
     private void preencherTabela() {
-        tableEspecialidades.setModel(EspecialidadeDAO.getTabelaEspecialidades());
+        tablePlanosDeSaude.setModel(PlanoDeSaudeDAO.getTabelaPlanosDeSaude());
 
         //definir a largura das colunas
-        tableEspecialidades.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tableEspecialidades.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tableEspecialidades.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tableEspecialidades.getColumnModel().getColumn(2).setPreferredWidth(430);
+        tablePlanosDeSaude.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tablePlanosDeSaude.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tablePlanosDeSaude.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tablePlanosDeSaude.getColumnModel().getColumn(2).setPreferredWidth(200);
+        tablePlanosDeSaude.getColumnModel().getColumn(3).setPreferredWidth(150);
+        tablePlanosDeSaude.getColumnModel().getColumn(4).setPreferredWidth(130);
     }
 
     private void ajustarTabela() {
 
         //impedir que o usuário movimente as colunas
-        tableEspecialidades.getTableHeader().setReorderingAllowed(false);
+        tablePlanosDeSaude.getTableHeader().setReorderingAllowed(false);
 
         //bloquear a edição das células da tabela
-        tableEspecialidades.setDefaultEditor(Object.class, null);
+        tablePlanosDeSaude.setDefaultEditor(Object.class, null);
     }
 
 }

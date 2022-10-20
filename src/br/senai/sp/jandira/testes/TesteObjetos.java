@@ -113,25 +113,25 @@ public class TesteObjetos {
 
         // criar 3 planos de saúde, armazenar em um arrayList
         // e exibir o nome da operadora de cada um deles
-        PlanoDeSaude p1 = new PlanoDeSaude("Intermédica");
-        PlanoDeSaude p2 = new PlanoDeSaude("Unimed");
-        PlanoDeSaude p3 = new PlanoDeSaude("Bradesco");
+       // PlanoDeSaude p1 = new PlanoDeSaude("Intermédica");
+      //  PlanoDeSaude p2 = new PlanoDeSaude("Unimed");
+       // PlanoDeSaude p3 = new PlanoDeSaude("Bradesco");
 
         ArrayList<PlanoDeSaude> planosDeSaude = new ArrayList<>();
-        planosDeSaude.add(p1);
-        planosDeSaude.add(p2);
-        planosDeSaude.add(p3);
+      //  planosDeSaude.add(p1);
+      //  planosDeSaude.add(p2);
+      //  planosDeSaude.add(p3);
 
         System.out.println("--------- FOR EACH ----------");
         for (PlanoDeSaude p : planosDeSaude) {
             System.out.println(p.getOperadora());
-            System.out.println(p.getQuantidade());
+        //    System.out.println(p.getQuantidade());
         }
 
-        System.out.println("-----" + PlanoDeSaude.getQuantidade());
+      //  System.out.println("-----" + PlanoDeSaude.getQuantidade());
 
         AgendaApp.main(args);
 
-        System.out.println("-----" + PlanoDeSaude.getQuantidade());
+      //  System.out.println("-----" + PlanoDeSaude.getQuantidade());
     }
 }

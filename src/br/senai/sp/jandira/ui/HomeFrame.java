@@ -13,6 +13,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
     // Atributos da classe
     PanelEspecialidades panelEspecialidades;
+    PanelPlanoDeSaude panelPlanoDeSaude;
     
     // Constantes
     private final int POS_X = 10;
@@ -243,11 +244,13 @@ public class HomeFrame extends javax.swing.JFrame {
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed
         panelEspecialidades.setVisible(true);
+        panelPlanoDeSaude.setVisible(false);
         panelHome.setVisible(false);
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
 
     private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
         panelEspecialidades.setVisible(false);
+        panelPlanoDeSaude.setVisible(false);
         panelHome.setVisible(true);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
@@ -256,7 +259,9 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlanoDeSaudeActionPerformed
-        // TODO add your handling code here:
+        panelEspecialidades.setVisible(false);
+        panelHome.setVisible(false);
+        panelPlanoDeSaude.setVisible(true);
     }//GEN-LAST:event_buttonPlanoDeSaudeActionPerformed
 
     private void buttonAgenda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgenda1ActionPerformed
@@ -296,5 +301,17 @@ public class HomeFrame extends javax.swing.JFrame {
         getContentPane().add(panelEspecialidades);
         panelEspecialidades.setVisible(false);
         
+            
+        panelPlanoDeSaude = new PanelPlanoDeSaude();
+                panelPlanoDeSaude.setBounds(
+                POS_X, 
+                POS_Y, 
+                LARGURA, 
+                ALTURA);
+        
+        getContentPane().add(panelPlanoDeSaude);
+        panelPlanoDeSaude.setVisible(false);
+        
     }
+
 }
