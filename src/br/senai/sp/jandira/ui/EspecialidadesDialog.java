@@ -122,7 +122,7 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
             }
         });
         panelDetalhes.add(textFieldNomeDaEspecialidade);
-        textFieldNomeDaEspecialidade.setBounds(40, 140, 290, 22);
+        textFieldNomeDaEspecialidade.setBounds(40, 140, 260, 22);
 
         labelDescricaoDaEspecialidade.setText("Descrição da Especialidade:");
         panelDetalhes.add(labelDescricaoDaEspecialidade);
@@ -172,12 +172,25 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textFieldNomeDaEspecialidadeActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        if (operacao == OperacaoEnum.ADICIONAR) {
-            adicionar();
-        } else {
-            editar();
+
+        CharSequence s = " ";
+
+        if (textFieldNomeDaEspecialidade.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Campo vazio!\nFavor digitar um nome da especialidade.");
+            textFieldNomeDaEspecialidade.requestFocus();
+            
+        } else if (textFieldDescricaoDaEsp.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Campo vazio!\nFavor digitar uma operadora.");
+            textFieldDescricaoDaEsp.requestFocus();
+
+        } else if (operacao == OperacaoEnum.ADICIONAR) {
+                adicionar();
+            } else {
+                editar();
     }//GEN-LAST:event_buttonSalvarActionPerformed
-    }
+        }
+
+    
 
     private void editar() {
         especialidade.setNome(textFieldNomeDaEspecialidade.getText());

@@ -77,7 +77,10 @@ public class PlanoDeSaudeDAO {
             dados[i][1] = p.getNumero();
             dados[i][2] = p.getOperadora();
             dados[i][3] = p.getCategoria();
-            dados[i][4] = p.getValidade().toString();
+            
+            DateTimeFormatter barra = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            
+            dados[i][4] = p.getValidade().format(barra);
         }
         
         return new DefaultTableModel(dados, titulo);
