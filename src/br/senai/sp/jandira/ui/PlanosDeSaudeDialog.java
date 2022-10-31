@@ -55,7 +55,8 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         textFieldNumero.setText(planoDeSaude.getNumero());
         textFieldOperadora.setText(planoDeSaude.getOperadora());
         textFieldCategoria.setText(planoDeSaude.getCategoria());
-        formattedTextFieldValidade.setText(planoDeSaude.getValidade().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        formattedTextFieldValidade.setText(planoDeSaude.getValidade()
+                .format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     private void preencherTitulo() {
@@ -212,19 +213,23 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         CharSequence s = " ";
 
         if (textFieldNumero.getText().isEmpty() == true) {
-            JOptionPane.showMessageDialog(null, "Campo vazio!\nFavor digitar um número.");
+            JOptionPane.showMessageDialog(null, 
+                    "Campo vazio!\nFavor digitar um número.");
             textFieldNumero.requestFocus();
             
         } else if (textFieldOperadora.getText().isEmpty() == true) {
-            JOptionPane.showMessageDialog(null, "Campo vazio!\nFavor digitar uma operadora.");
+            JOptionPane.showMessageDialog(null, 
+                    "Campo vazio!\nFavor digitar uma operadora.");
             textFieldOperadora.requestFocus();
             
         } else if (textFieldCategoria.getText().isEmpty() == true) {
-            JOptionPane.showMessageDialog(null, "Campo vazio!\nFavor digitar uma categoria.");
+            JOptionPane.showMessageDialog(null, 
+                    "Campo vazio!\nFavor digitar uma categoria.");
             textFieldCategoria.requestFocus();
             
         } else if (formattedTextFieldValidade.getText().contains(s) == true) {
-            JOptionPane.showMessageDialog(null, "Campo vazio!\nFavor digitar uma validade.");
+            JOptionPane.showMessageDialog(null, 
+                    "Campo vazio!\nFavor digitar uma validade.");
             formattedTextFieldValidade.requestFocus();
             
         } else if (operacao == OperacaoEnum.ADICIONAR) {
@@ -239,7 +244,9 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         planoDeSaude.setNumero(textFieldNumero.getText());
         planoDeSaude.setOperadora(textFieldOperadora.getText());
         planoDeSaude.setCategoria(textFieldCategoria.getText());
-        planoDeSaude.setValidade(LocalDate.parse(formattedTextFieldValidade.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        planoDeSaude.setValidade(LocalDate.parse(
+                formattedTextFieldValidade.getText(), 
+                DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
         PlanoDeSaudeDAO.atualizar(planoDeSaude);
 
@@ -270,7 +277,9 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         novoPlanoDeSaude.setNumero(textFieldNumero.getText());
         novoPlanoDeSaude.setOperadora(textFieldOperadora.getText());
         novoPlanoDeSaude.setCategoria(textFieldCategoria.getText());
-        novoPlanoDeSaude.setValidade(LocalDate.parse(formattedTextFieldValidade.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        novoPlanoDeSaude.setValidade(LocalDate.parse(
+                formattedTextFieldValidade.getText(), 
+                DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
         // Gravar o objeto, através do DAO.
         PlanoDeSaudeDAO.gravar(novoPlanoDeSaude);
