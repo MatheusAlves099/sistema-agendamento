@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.ui;
 
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 public class HomeFrame extends javax.swing.JFrame {
 
@@ -260,7 +261,17 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
-        dispose();
+
+        int resposta = JOptionPane.showConfirmDialog(
+                this,
+                "Você realmente deseja sair?",
+                "Atenção!",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if (resposta == 0) {
+            dispose();
+        }
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlanoDeSaudeActionPerformed

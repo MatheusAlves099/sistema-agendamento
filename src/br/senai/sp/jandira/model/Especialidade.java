@@ -21,7 +21,14 @@ public class Especialidade {
         gerarCodigo();
     }
 
-    public Especialidade() { // Construtor Default (Padrão) -> que não pede nada
+    public Especialidade(String nome, String descricao, Integer codigo) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.codigo = codigo;
+        this.contador = codigo;
+    }
+
+    public Especialidade() { // Construtor default (padrão) -> que não pede nada
         gerarCodigo();
     }
 
@@ -44,7 +51,7 @@ public class Especialidade {
     }
 
     public void setNome(String nome) {
-            this.nome = nome;
+        this.nome = nome;
 
     }
 
@@ -57,12 +64,20 @@ public class Especialidade {
         if (descricao.length() >= 10) {
             this.descricao = descricao;
         } else {
-            JOptionPane.showMessageDialog(null, "Não é uma descrição válida!\n Favor digitar novamente.", "Erro", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Não é uma descrição válida!\n Favor digitar novamente.",
+                    "Erro",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public String getEspecialidadeSeparadaPorPontoEVirgula() {
+        return this.codigo + ";" + this.nome + ";" + this.descricao;
     }
 
 }

@@ -20,6 +20,15 @@ public class PlanoDeSaude {
         gerarCodigo();
     }
 
+    public PlanoDeSaude(String operadora, String categoria, String numero, LocalDate validade, Integer codigo) {
+        this.operadora = operadora;
+        this.categoria = categoria;
+        this.numero = numero;
+        this.validade = validade;
+        this.codigo = codigo;
+        this.contador = codigo;
+    }
+
     public PlanoDeSaude() {
         gerarCodigo();
     }
@@ -42,7 +51,7 @@ public class PlanoDeSaude {
     }
 
     public void setOperadora(String operadora) {
-            this.operadora = operadora;
+        this.operadora = operadora;
     }
 
     public String getOperadora() {
@@ -50,7 +59,7 @@ public class PlanoDeSaude {
     }
 
     public void setCategoria(String categoria) {
-            this.categoria = categoria;
+        this.categoria = categoria;
     }
 
     public String getCategoria() {
@@ -58,7 +67,7 @@ public class PlanoDeSaude {
     }
 
     public void setNumero(String numero) {
-            this.numero = numero;
+        this.numero = numero;
     }
 
     public String getNumero() {
@@ -66,11 +75,15 @@ public class PlanoDeSaude {
     }
 
     public void setValidade(LocalDate validade) {
-            this.validade = validade;
+        this.validade = validade;
     }
 
     public LocalDate getValidade() {
         return validade;
+    }
+
+    public String getPlanoDeSaudeSeparadoPorPontoEVirgula() {
+        return this.codigo + ";" + this.operadora + ";" + this.categoria + ";" + this.numero + ";" + this.validade;
     }
 
 }

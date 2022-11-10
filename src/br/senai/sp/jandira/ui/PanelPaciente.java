@@ -45,7 +45,7 @@ public class PanelPaciente extends javax.swing.JPanel {
         buttonEditar = new javax.swing.JButton();
         buttonAdicionar = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de planos de saude:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT", 1, 12), new java.awt.Color(255, 0, 51))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de pacientes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT", 1, 12), new java.awt.Color(255, 0, 51))); // NOI18N
         setPreferredSize(new java.awt.Dimension(780, 290));
         setLayout(null);
 
