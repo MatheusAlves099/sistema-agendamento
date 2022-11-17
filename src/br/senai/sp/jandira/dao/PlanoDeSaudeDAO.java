@@ -1,8 +1,10 @@
 package br.senai.sp.jandira.dao;
 
+import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +19,9 @@ import javax.swing.table.DefaultTableModel;
 public class PlanoDeSaudeDAO {
 
     private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\PlanoDeSaude.txt";
+    private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\PlanoDeSaude-temp.txt";
     private final static Path PATH = Paths.get(URL);
+    private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
     private static ArrayList<PlanoDeSaude> planosDeSaude = new ArrayList<>();
 
@@ -47,7 +51,7 @@ public class PlanoDeSaudeDAO {
     public static PlanoDeSaude getPlanoDeSaude(Integer codigo) { // Read
 
         for (PlanoDeSaude p : planosDeSaude) {
-            if (p.getCodigo() == codigo) {
+            if (p.getCodigo().equals(codigo)) {
                 return p;
             }
         }
@@ -57,20 +61,60 @@ public class PlanoDeSaudeDAO {
 
     public static void atualizar(PlanoDeSaude planoDeSaudeAtualizado) { // Update
         for (PlanoDeSaude p : planosDeSaude) {
-            if (p.getCodigo() == planoDeSaudeAtualizado.getCodigo()) {
+            if (p.getCodigo().equals(planoDeSaudeAtualizado.getCodigo())) {
                 planosDeSaude.set(planosDeSaude.indexOf(p), planoDeSaudeAtualizado);
                 break;
             }
+
+            atualizarArquivo();
         }
     }
 
     public static void excluir(Integer codigo) { // Delete
 
         for (PlanoDeSaude p : planosDeSaude) {
-            if (p.getCodigo() == codigo) {
+            if (p.getCodigo().equals(codigo)) {
                 planosDeSaude.remove(p);
                 break;
             }
+        }
+
+        atualizarArquivo();
+    }
+
+    private static void atualizarArquivo() {
+        // PASSO 01 - Criar uma representação dos arquivos que serão manipulados
+        File arquivoAtual = new File(URL);
+        File arquivoTemp = new File(URL_TEMP);
+
+        try {
+            // Criar o arquivo temporário
+            arquivoTemp.createNewFile();
+
+            // Abrir o arquivo temporário para escrita
+            BufferedWriter bwTemp = Files.newBufferedWriter(
+                    PATH_TEMP,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+
+            // Iterar na lista para adicionar as especialidades
+            // no arquivo temporário, exceto o registro que
+            // não teremos mais
+            for (PlanoDeSaude p : planosDeSaude) {
+                bwTemp.write(p.getPlanoDeSaudeSeparadoPorPontoEVirgula());
+                bwTemp.newLine();
+            }
+
+            bwTemp.close();
+
+            // Excluir o arquivo atual
+            arquivoAtual.delete();
+
+            // Renomear o arquivo temporário
+            arquivoTemp.renameTo(arquivoAtual);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -87,10 +131,10 @@ public class PlanoDeSaudeDAO {
                 // Transformar os dados da linha em uma especialidade
                 String[] vetor = linha.split(";");
                 PlanoDeSaude p = new PlanoDeSaude(
-                        vetor[1], 
-                        vetor[2], 
-                        vetor[3], 
-                        LocalDate.parse(vetor[4]), 
+                        vetor[1],
+                        vetor[2],
+                        vetor[3],
+                        LocalDate.parse(vetor[4]),
                         Integer.valueOf(vetor[0]));
 
                 // Guardar o plano de saúde na lista

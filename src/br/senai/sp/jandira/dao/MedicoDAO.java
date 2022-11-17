@@ -1,6 +1,6 @@
 package br.senai.sp.jandira.dao;
 
-import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.Medico;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,21 +9,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class EspecialidadeDAO {
+public class MedicoDAO {
 
-    private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Especialidade.txt"; // final = nunca pode ser alterada.
-    private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Especialidade-temp.txt";
-    private final static Path PATH = Paths.get(URL);
-    private final static Path PATH_TEMP = Paths.get(URL_TEMP);
+   private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico.txt";
+   private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico-temp.txt";
+   private final static Path PATH = Paths.get(URL);
+   private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
-    private static ArrayList<Especialidade> especialidades = new ArrayList<>();
+    private static ArrayList<Medico> medicos = new ArrayList<>();
 
-    public static void gravar(Especialidade e) { // Create
-        especialidades.add(e);
+    public static void gravar(Medico m) { // Create
+        medicos.add(m);
 
         //*** GRAVAR EM ARQUIVO ***
         try {
@@ -32,7 +33,7 @@ public class EspecialidadeDAO {
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
 
-            escritor.write(e.getEspecialidadeSeparadaPorPontoEVirgula());
+            escritor.write(m.getMedicoSeparadoPorPontoEVirgula());
             escritor.newLine();
             escritor.close();
 
@@ -41,43 +42,42 @@ public class EspecialidadeDAO {
         }
     }
 
-    public static ArrayList<Especialidade> getEspecialidades() { // Read
-        return especialidades;
+    public static ArrayList<Medico> getMedico() { // Read
+        return medicos;
     }
 
-    public static Especialidade getEspecialidade(Integer codigo) { // Read
+    public static Medico getMedico(Integer codigo) { // Read
 
-        for (Especialidade e : especialidades) {
-            if (e.getCodigo().equals(codigo)) {
-                return e;
+        for (Medico m : medicos) {
+            if (m.getCodigo().equals(codigo)) {
+                return m;
             }
         }
 
         return null;
     }
 
-    public static void atualizar(Especialidade especialidadeAtualizada) { // Update
-        for (Especialidade e : especialidades) {
-            if (e.getCodigo().equals(especialidadeAtualizada.getCodigo())) {
-                especialidades.set(especialidades.indexOf(e), especialidadeAtualizada);
+    public static void atualizar(Medico medicoAtualizado) { // Update
+        for (Medico m : medicos) {
+            if (m.getCodigo().equals(medicoAtualizado.getCodigo())) {
+                medicos.set(medicos.indexOf(m), medicoAtualizado);
                 break;
             }
-            
+
             atualizarArquivo();
         }
     }
 
     public static void excluir(Integer codigo) { // Delete
 
-        for (Especialidade e : especialidades) {
-            if (e.getCodigo().equals(codigo)) {
-                especialidades.remove(e);
+        for (Medico m : medicos) {
+            if (m.getCodigo().equals(codigo)) {
+                medicos.remove(m);
                 break;
             }
         }
 
         atualizarArquivo();
-        
     }
 
     private static void atualizarArquivo() {
@@ -98,16 +98,16 @@ public class EspecialidadeDAO {
             // Iterar na lista para adicionar as especialidades
             // no arquivo temporário, exceto o registro que
             // não teremos mais
-            for(Especialidade e : especialidades) {
-                bwTemp.write(e.getEspecialidadeSeparadaPorPontoEVirgula());
+            for (Medico m : medicos) {
+                bwTemp.write(m.getMedicoSeparadoPorPontoEVirgula());
                 bwTemp.newLine();
             }
-            
+
             bwTemp.close();
-            
+
             // Excluir o arquivo atual
             arquivoAtual.delete();
-            
+
             // Renomear o arquivo temporário
             arquivoTemp.renameTo(arquivoAtual);
 
@@ -116,8 +116,8 @@ public class EspecialidadeDAO {
         }
     }
 
-    // Criar uma lista inicial de especialidades
-    public static void criarListaDeEspecialidades() {
+    // Criar uma lista inicial de medicos
+    public static void criarListaDeMedicos() {
 
         //*** LEITURA DE ARQUIVO ***
         try {
@@ -128,13 +128,14 @@ public class EspecialidadeDAO {
             while (linha != null) {
                 // Transformar os dados da linha em uma especialidade
                 String[] vetor = linha.split(";");
-                Especialidade e = new Especialidade(
-                        vetor[1],
-                        vetor[2],
-                        Integer.valueOf(vetor[0]));
+                Medico m = new Medico(
+                        vetor[1], 
+                        vetor[2], 
+                        vetor[3],
+                Integer.valueOf(vetor[0]));
 
-                // Guardar a especialidade na lista
-                especialidades.add(e);
+                // Guardar o plano de saúde na lista
+                medicos.add(m);
 
                 // Ler a próxima linha
                 linha = leitor.readLine();
@@ -150,16 +151,17 @@ public class EspecialidadeDAO {
 
     }
 
-    public static DefaultTableModel getTabelaEspecialidades() {
+    public static DefaultTableModel getTabelaMedicos() {
 
-        String[] titulo = {"CÓDIGO", "NOME DA ESPECIALIDADE", "DESCRIÇÃO"};
-        String[][] dados = new String[especialidades.size()][3];
+        String[] titulo = {"CÓDIGO", "CRM", "NOME", "TELEFONE"};
+        String[][] dados = new String[medicos.size()][4];
 
-        for (Especialidade e : especialidades) {
-            int i = especialidades.indexOf(e);
-            dados[i][0] = e.getCodigo().toString();
-            dados[i][1] = e.getNome();
-            dados[i][2] = e.getDescricao();
+        for (Medico m : medicos) {
+            int i = medicos.indexOf(m);
+            dados[i][0] = m.getCodigo().toString();
+            dados[i][1] = m.getCrm();
+            dados[i][2] = m.getNome();
+            dados[i][3] = m.getTelefone();
         }
 
         return new DefaultTableModel(dados, titulo);
