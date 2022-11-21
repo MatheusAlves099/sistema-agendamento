@@ -1,6 +1,5 @@
 package br.senai.sp.jandira.dao;
 
-import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

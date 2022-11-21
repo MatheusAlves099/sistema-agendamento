@@ -249,7 +249,7 @@ public class HomeFrame extends javax.swing.JFrame {
         panelEspecialidades.setVisible(false);
         panelPlanoDeSaude.setVisible(false);
         panelHome.setVisible(false);
-        panelMedico.setVisible(false);
+        panelPaciente.setVisible(false);
     }//GEN-LAST:event_buttonMedicosActionPerformed
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed

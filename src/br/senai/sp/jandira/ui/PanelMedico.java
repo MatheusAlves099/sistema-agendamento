@@ -5,7 +5,6 @@ import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -45,7 +44,7 @@ public class PanelMedico extends javax.swing.JPanel {
         buttonEditar = new javax.swing.JButton();
         buttonAdicionar = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de planos de saude:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT", 1, 12), new java.awt.Color(255, 0, 51))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de médicos:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Gill Sans MT", 1, 12), new java.awt.Color(255, 0, 51))); // NOI18N
         setPreferredSize(new java.awt.Dimension(780, 290));
         setLayout(null);
 
@@ -186,11 +185,10 @@ public class PanelMedico extends javax.swing.JPanel {
 
         //definir a largura das colunas
         tableMedicos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tableMedicos.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tableMedicos.getColumnModel().getColumn(0).setPreferredWidth(150);
         tableMedicos.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tableMedicos.getColumnModel().getColumn(2).setPreferredWidth(200);
-        tableMedicos.getColumnModel().getColumn(3).setPreferredWidth(150);
-        tableMedicos.getColumnModel().getColumn(4).setPreferredWidth(130);
+        tableMedicos.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tableMedicos.getColumnModel().getColumn(3).setPreferredWidth(130);
     }
 
     private void ajustarTabela() {

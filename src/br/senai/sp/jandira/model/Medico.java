@@ -28,13 +28,12 @@ public class Medico {
         this.contador = codigo;
     }
 
-    public Medico(String crm, String nome, String telefone, String email, LocalDate dataDeNascimento, Especialidade[] especialidades, Integer codigo) {
+    public Medico(String crm, String nome, String telefone, String email, LocalDate dataDeNascimento, Integer codigo) {
         this.crm = crm;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.dataDeNascimento = dataDeNascimento;
-        this.especialidades = especialidades;
         this.codigo = codigo;
         this.contador = codigo;
     }

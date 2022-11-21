@@ -10,16 +10,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicoDAO {
 
-   private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico.txt";
-   private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico-temp.txt";
-   private final static Path PATH = Paths.get(URL);
-   private final static Path PATH_TEMP = Paths.get(URL_TEMP);
+    private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico.txt";
+    private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico-temp.txt";
+    private final static Path PATH = Paths.get(URL);
+    private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
     private static ArrayList<Medico> medicos = new ArrayList<>();
 
@@ -131,8 +132,10 @@ public class MedicoDAO {
                 Medico m = new Medico(
                         vetor[1], 
                         vetor[2], 
-                        vetor[3],
-                Integer.valueOf(vetor[0]));
+                        vetor[3], 
+                        vetor[4], 
+                        LocalDate.parse(vetor[5]), 
+                        Integer.valueOf(vetor[0]));
 
                 // Guardar o plano de saúde na lista
                 medicos.add(m);
@@ -154,7 +157,7 @@ public class MedicoDAO {
     public static DefaultTableModel getTabelaMedicos() {
 
         String[] titulo = {"CÓDIGO", "CRM", "NOME", "TELEFONE"};
-        String[][] dados = new String[medicos.size()][4];
+        String[][] dados = new String[medicos.size()][6];
 
         for (Medico m : medicos) {
             int i = medicos.indexOf(m);
@@ -162,6 +165,11 @@ public class MedicoDAO {
             dados[i][1] = m.getCrm();
             dados[i][2] = m.getNome();
             dados[i][3] = m.getTelefone();
+            dados[i][4] = m.getEmail();
+
+            DateTimeFormatter barra = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            dados[i][5] = m.getDataDeNascimento().format(barra);
         }
 
         return new DefaultTableModel(dados, titulo);

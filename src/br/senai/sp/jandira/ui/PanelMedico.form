@@ -4,7 +4,7 @@
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="Lista de planos de saude:">
+        <TitledBorder title="Lista de m&#xe9;dicos:">
           <Font PropertyName="font" name="Gill Sans MT" size="12" style="1"/>
           <Color PropertyName="color" blue="33" green="0" red="ff" type="rgb"/>
         </TitledBorder>
