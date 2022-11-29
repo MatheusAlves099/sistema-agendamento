@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +43,7 @@ public class EspecialidadeDAO {
     }
 
     public static ArrayList<Especialidade> getEspecialidades() { // Read
-        return especialidades;
+            return especialidades;
     }
 
     public static Especialidade getEspecialidade(Integer codigo) { // Read
@@ -62,7 +63,7 @@ public class EspecialidadeDAO {
                 especialidades.set(especialidades.indexOf(e), especialidadeAtualizada);
                 break;
             }
-            
+
             atualizarArquivo();
         }
     }
@@ -77,7 +78,7 @@ public class EspecialidadeDAO {
         }
 
         atualizarArquivo();
-        
+
     }
 
     private static void atualizarArquivo() {
@@ -98,16 +99,16 @@ public class EspecialidadeDAO {
             // Iterar na lista para adicionar as especialidades
             // no arquivo temporário, exceto o registro que
             // não teremos mais
-            for(Especialidade e : especialidades) {
+            for (Especialidade e : especialidades) {
                 bwTemp.write(e.getEspecialidadeSeparadaPorPontoEVirgula());
                 bwTemp.newLine();
             }
-            
+
             bwTemp.close();
-            
+
             // Excluir o arquivo atual
             arquivoAtual.delete();
-            
+
             // Renomear o arquivo temporário
             arquivoTemp.renameTo(arquivoAtual);
 
@@ -163,6 +164,15 @@ public class EspecialidadeDAO {
         }
 
         return new DefaultTableModel(dados, titulo);
+    }
+
+    public static DefaultListModel<Especialidade> getListaEspecialidades() {
+        DefaultListModel<Especialidade> listaEspecialidades = new DefaultListModel<>();
+        for (Especialidade percorrer : getEspecialidades()) {
+            listaEspecialidades.addElement(percorrer);
+            listaEspecialidades.toString();
+        }
+        return listaEspecialidades;
     }
 
 }

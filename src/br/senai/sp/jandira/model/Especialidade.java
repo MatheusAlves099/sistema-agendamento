@@ -58,6 +58,10 @@ public class Especialidade {
     public String getNome() {
         return nome;
     }
+    
+    public String toString() {
+        return this.nome;
+    }
 
     public void setDescricao(String descricao) {
 
