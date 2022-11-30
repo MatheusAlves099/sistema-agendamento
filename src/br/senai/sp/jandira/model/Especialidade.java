@@ -60,7 +60,7 @@ public class Especialidade {
     }
     
     public String toString() {
-        return this.nome;
+        return nome;
     }
 
     public void setDescricao(String descricao) {

@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Medico;
+import br.senai.sp.jandira.model.Especialidade;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,13 +13,16 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicoDAO {
 
-    private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico.txt";
-    private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico-temp.txt";
+    //private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico.txt";
+    //private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico-temp.txt";
+    private final static String URL = "C:\\Users\\Matheus\\Desktop\\Medico.txt";
+    private final static String URL_TEMP = "C:\\Users\\Matheus\\Desktop\\Medico-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
@@ -112,7 +116,7 @@ public class MedicoDAO {
             // Renomear o arquivo temporário
             arquivoTemp.renameTo(arquivoAtual);
 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -135,6 +139,7 @@ public class MedicoDAO {
                         vetor[3], 
                         vetor[4], 
                         LocalDate.parse(vetor[5]), 
+                        codigoSeparado(linha), 
                         Integer.valueOf(vetor[0]));
 
                 // Guardar o plano de saúde na lista
@@ -173,6 +178,44 @@ public class MedicoDAO {
         }
 
         return new DefaultTableModel(dados, titulo);
+    }
+
+    public static ArrayList<Especialidade> codigoSeparado(String linha) {
+        String[] vetor = linha.split(";");
+
+        int codigoDaEspecialidade = 6;
+
+        ArrayList<Especialidade> codigos = new ArrayList<>();
+        while (codigoDaEspecialidade < vetor.length) {
+            codigos.add(EspecialidadeDAO.getEspecialidade(Integer.valueOf(vetor[codigoDaEspecialidade])));
+        }
+        return codigos;
+    }
+
+    public static DefaultListModel<Especialidade> getListaEspecialidades() {
+
+        DefaultListModel<Especialidade> listaDeEspecialidades = new DefaultListModel<Especialidade>();
+        
+        try {
+            
+            BufferedReader leitor = Files.newBufferedReader(PATH);
+            String linha = leitor.readLine();
+            
+            for (Especialidade percorrer : codigoSeparado(linha)) {
+                listaDeEspecialidades.addElement(percorrer);
+            }
+            
+            leitor.close();
+            
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Ocorreu um erro, favor tentar montar a lista novamente.");
+        }
+        return listaDeEspecialidades;
+    }
+    
+        public static Path getPath() {
+        return PATH;
     }
 
 }

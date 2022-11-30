@@ -1,16 +1,17 @@
 package br.senai.sp.jandira.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Medico {
 
     private static int contador = 99;
     private Integer codigo;
     private String nome;
-    private Especialidade[] especialidades;
     private String telefone;
     private String email;
     private String crm;
+    private ArrayList<Especialidade> especialidades;
     private LocalDate dataDeNascimento;
 
     public Medico(String crm, String nome, String telefone) {
@@ -20,15 +21,7 @@ public class Medico {
         gerarCodigo();
     }
 
-    public Medico(String crm, String nome, String telefone, Integer codigo) {
-        this.crm = crm;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.codigo = codigo;
-        this.contador = codigo;
-    }
-
-    public Medico(String crm, String nome, String telefone, String email, LocalDate dataDeNascimento, Integer codigo) {
+    public Medico(String crm, String nome, String telefone, String email, LocalDate dataDeNascimento, ArrayList<Especialidade> especialidades, Integer codigo) {
         this.crm = crm;
         this.nome = nome;
         this.telefone = telefone;
@@ -37,6 +30,7 @@ public class Medico {
         this.codigo = codigo;
         this.contador = codigo;
     }
+
 
     public String getNome() {
         return nome;
@@ -63,12 +57,21 @@ public class Medico {
         this.codigo = codigo;
     }
 
-    public Especialidade[] getEspecialidades() {
+    public ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
     }
 
-    public void setEspecialidades(Especialidade[] especialidades) {
+    public void setEspecialidades(ArrayList<Especialidade> especialidades) {
         this.especialidades = especialidades;
+    }
+
+    public String convertendoArrayParaString(ArrayList<Especialidade> arrayList) {
+        ArrayList<String> codigo = new ArrayList<String>();
+        for (Especialidade e : arrayList) {
+            codigo.add(e.getCodigo().toString());
+        }
+        
+        return String.join(";", codigo);
     }
 
     public String getTelefone() {
@@ -104,7 +107,14 @@ public class Medico {
     }
 
     public String getMedicoSeparadoPorPontoEVirgula() {
-        return this.codigo + ";" + this.crm + ";" + this.nome + ";" + this.telefone + ";" + this.email + ";" + this.dataDeNascimento;
+        return 
+                this.codigo + ";"
+                + this.crm + ";" 
+                + this.nome + ";" 
+                + this.telefone + ";" 
+                + this.email + ";" 
+                + this.dataDeNascimento + ";"
+                + convertendoArrayParaString(this.especialidades);
     }
 
 }

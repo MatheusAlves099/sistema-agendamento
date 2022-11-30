@@ -16,8 +16,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadeDAO {
 
-    private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Especialidade.txt"; // final = nunca pode ser alterada.
-    private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Especialidade-temp.txt";
+    //private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Especialidade.txt"; // final = nunca pode ser alterada.
+    //private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Especialidade-temp.txt";
+    private final static String URL = "C:\\Users\\Matheus\\Desktop\\Especialidade.txt";
+    private final static String URL_TEMP = "C:\\Users\\Matheus\\Desktop\\Especialidade-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
@@ -43,7 +45,7 @@ public class EspecialidadeDAO {
     }
 
     public static ArrayList<Especialidade> getEspecialidades() { // Read
-            return especialidades;
+        return especialidades;
     }
 
     public static Especialidade getEspecialidade(Integer codigo) { // Read
@@ -167,10 +169,9 @@ public class EspecialidadeDAO {
     }
 
     public static DefaultListModel<Especialidade> getListaEspecialidades() {
-        DefaultListModel<Especialidade> listaEspecialidades = new DefaultListModel<>();
+        DefaultListModel<Especialidade> listaEspecialidades = new DefaultListModel<Especialidade>();
         for (Especialidade percorrer : getEspecialidades()) {
             listaEspecialidades.addElement(percorrer);
-            listaEspecialidades.toString();
         }
         return listaEspecialidades;
     }
