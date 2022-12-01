@@ -474,21 +474,14 @@ public class MedicosDialog extends javax.swing.JDialog {
     }
 
     private void preencherListaDeEspecialidadesDoMedico() {
-        try {
-            BufferedReader reader = Files.newBufferedReader(MedicoDAO.getPath());
-
-            String linha = reader.readLine();
 
             DefaultListModel<Especialidade> especialidadesDoMedico = new DefaultListModel<>();
-            for (Especialidade percorrer : MedicoDAO.codigoSeparado(linha)) {
+            for (Especialidade percorrer : medico.getEspecialidades()) {
                 especialidadesDoMedico.addElement(percorrer);
             }
 
             jListListaDeEspecialidadesDoMedico.setModel(especialidadesDoMedico);
 
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
     }
     
         private ArrayList<Especialidade> puxarEspecialidade(JList<Especialidade> list) {

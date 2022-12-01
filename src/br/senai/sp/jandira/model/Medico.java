@@ -65,9 +65,9 @@ public class Medico {
         this.especialidades = especialidades;
     }
 
-    public String convertendoArrayParaString(ArrayList<Especialidade> arrayList) {
+    public String convertendoArrayParaString(ArrayList<Especialidade> list) {
         ArrayList<String> codigo = new ArrayList<String>();
-        for (Especialidade e : arrayList) {
+        for (Especialidade e : list) {
             codigo.add(e.getCodigo().toString());
         }
         
