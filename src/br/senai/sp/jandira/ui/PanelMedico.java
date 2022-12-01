@@ -153,7 +153,7 @@ public class PanelMedico extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(
                     this,
-                    "Por favor, selecione o médico que você deseja editar.",
+                    "Por favor, selecione o(a) médico(a) que você deseja editar.",
                     "Médicos",
                     JOptionPane.WARNING_MESSAGE);
         }

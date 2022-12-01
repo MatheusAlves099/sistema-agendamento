@@ -355,7 +355,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         medico.setDataDeNascimento(LocalDate.parse(
                 formattedTextFieldDataDeNascimento.getText(),
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        medico.setEspecialidades(puxarEspecialidade(jListListaDeEspecialidades));
+        medico.setEspecialidades(puxarEspecialidade(jListListaDeEspecialidadesDoMedico));
 
         MedicoDAO.atualizar(medico);
 
@@ -378,7 +378,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         novoMedico.setDataDeNascimento(LocalDate.parse(
                 formattedTextFieldDataDeNascimento.getText(),
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        novoMedico.setEspecialidades(puxarEspecialidade(jListListaDeEspecialidades));
+        novoMedico.setEspecialidades(puxarEspecialidade(jListListaDeEspecialidadesDoMedico));
 
         // Gravar o objeto, através do DAO.
         MedicoDAO.gravar(novoMedico);
@@ -427,6 +427,7 @@ public class MedicosDialog extends javax.swing.JDialog {
                     listaDeEspecialidades.addElement(percorrer);
                 }
                 jListListaDeEspecialidadesDoMedico.setModel(listaDeEspecialidades);
+                
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Essa especialidade já está cadastrada! Tente novamente.",
@@ -457,6 +458,7 @@ public class MedicosDialog extends javax.swing.JDialog {
                 listaDeEspecialidades.addElement(percorrer);
             }
             jListListaDeEspecialidadesDoMedico.setModel(listaDeEspecialidades);
+            
         } else {
             JOptionPane.showMessageDialog(this,
                     "Nenhuma especialidade foi selecionada para ser deletada! Favor selecionar.",

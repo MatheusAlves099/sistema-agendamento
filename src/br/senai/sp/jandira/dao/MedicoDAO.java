@@ -19,10 +19,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class MedicoDAO {
 
-    //private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico.txt";
-    //private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico-temp.txt";
-    private final static String URL = "C:\\Users\\Matheus\\Desktop\\Medico.txt";
-    private final static String URL_TEMP = "C:\\Users\\Matheus\\Desktop\\Medico-temp.txt";
+    private final static String URL = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico.txt";
+    private final static String URL_TEMP = "C:\\Users\\22282211\\java\\projeto-agenda\\Medico-temp.txt";
+    //private final static String URL = "C:\\Users\\Matheus\\Desktop\\Medico.txt";
+    //private final static String URL_TEMP = "C:\\Users\\Matheus\\Desktop\\Medico-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
@@ -162,7 +162,7 @@ public class MedicoDAO {
     public static DefaultTableModel getTabelaMedicos() {
 
         String[] titulo = {"CÓDIGO", "CRM", "NOME", "TELEFONE"};
-        String[][] dados = new String[medicos.size()][6];
+        String[][] dados = new String[medicos.size()][5];
 
         for (Medico m : medicos) {
             int i = medicos.indexOf(m);
@@ -170,11 +170,11 @@ public class MedicoDAO {
             dados[i][1] = m.getCrm();
             dados[i][2] = m.getNome();
             dados[i][3] = m.getTelefone();
-            dados[i][4] = m.getEmail();
 
             DateTimeFormatter barra = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            dados[i][5] = m.getDataDeNascimento().format(barra);
+            dados[i][4] = m.getDataDeNascimento().format(barra);
+            i++;
         }
 
         return new DefaultTableModel(dados, titulo);
@@ -188,6 +188,7 @@ public class MedicoDAO {
         ArrayList<Especialidade> codigos = new ArrayList<>();
         while (codigoDaEspecialidade < vetor.length) {
             codigos.add(EspecialidadeDAO.getEspecialidade(Integer.valueOf(vetor[codigoDaEspecialidade])));
+            codigoDaEspecialidade++;
         }
         return codigos;
     }
